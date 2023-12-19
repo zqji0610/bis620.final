@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# bis620.2023
+# bis620.final
 
 <!-- badges: start -->
 
@@ -8,68 +8,57 @@
 
 <!-- badges: end -->
 
-The *bis620.2023* project integrates the Clinical Trials Query Shiny app we built in the last homework assignment into an R package, which allows easier management of the app features and testing of its functionality.
-
-### Package features
-
-Users can filter the dataset by specific fields, including:
-
-1.  Title keywords search
-
-2.  Define study date ranges
-
-3.  Define sponsor types
-
-4.  Histogram visualization customization
-
-Displaying Visualization includes:
-
-1.  Phase Histogram
-
-2.  Condition Histogram
-
-3.  Primary Purpose Pie Chart
-
-4.  Study Type Histogram
-
-5.  Intervention Type Pie Chart
-
-6.  Intervention Histogran Specified by Intervention Type
+The bis620.final project aims to explore the current landscape of clinical studies on metastatic colorectal cancer (mCRC) using clinical trials metadata on clinicaltrials.gov. The package offers off-the-shelf data visualization and statistical analyses tools that allows users to understand characteristics of recent mCRC clinical trials.
 
 ## Installation
 
-You can install the development version of bis620.2023 from [GitHub](https://github.com/) with:
+You can install the development version of bis620.final from [GitHub](https://github.com/) with:
 
 ``` r
 install.packages("devtools")
-install_github("Yukodeng/bis620.2023")
+install_github("Yukodeng/bis620.final")
 
 # Or alternatively:
-devtools::install_github("Yukodeng/bis620.2023")
+devtools::install_github("Yukodeng/bis620.final")
 ```
-
-***Important note:** This package assumes there is a `ctrialsgov.duckdb` file under the `/data-raw` folder. Due to file size restriction of GitHub, this file is removed from the package directory. To use the shiny app function of this package, make sure to manually add this file to the designated location.*
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+### Dataset
+
+The below code block shows you the one of the datasets we are using which consists of information about 717 clinical trials that are related to mCRC:
 
 ``` r
-library(bis620.2023)
-accel |> 
-  head(100) |> 
-  plot_accel()
+library(bis620.final)
+crc |> 
+  head(5)
 ```
 
-<img src="man/figures/README-example-1.png" width="100%"/>
-
-To launch the Clinical Trials Query application, use `run_application()`. Query the clinical trials data by typing in or selecting values in the search fields:
+Next, this shows the second dataset which contains information about the specific interventions used in the above clinical trials:
 
 ``` r
-library(bis620.2023)
-run_application()
+crc_sub |> 
+  head(5)
 ```
 
-<img src="man/figures/condition_hist.png" width="100%"/>
+### Data Visualization & Analyses
 
-<img src="man/figures/inter_pie.png" width="100%"/>
+Here are a few snapshots of implementing the functions of this package:
+
+``` r
+plot_crc_sankey()
+```
+
+<img src="man/figures/sankey_plot.png" width="100%"/>
+
+``` r
+plot_intervention_proportion_time()
+```
+
+<img src="man/figures/intervention_prop_over_time.png" width="100%"/>
+
+``` r
+plot_intervention_count_time()
+```
+
+<img src="man/figures/intervention_count_over_time.png" width="100%"/>
