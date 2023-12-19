@@ -1,0 +1,63 @@
+---
+title: "Project Abstract"
+author: "Yining Chen, Yufei Deng, Ziqing Ji"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Project Abstract}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\UseRaw{}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>"
+)
+```
+
+# Background and Motivation
+
+Colorectal cancer (CRC) is the fourth common malignancy, representing 8.3% of all cancer diagnoses and 8.4% of all cancer deaths in the US. There are more than one million people living with CRC in the United States and 4.2% percent of all adults are expected to be diagnosed with CRC at some point during their lifetime
+
+# Research Question
+
+# Data Cleaning and Exploration
+
+## Datasets used in our analysis
+
+```{r}
+library(bis620.final)
+crc_sub |> head(5)
+```
+
+## Data Visualization
+
+
+### Time Trend
+
+Proportion of Intervention Types over Time
+
+```{r}
+plot_intervention_proportion_time()
+```
+
+### Number of Intervention Types over Time
+```{r}
+plot_intervention_count_time()
+```
+
+## Summary table & Sankey Diagram
+```{r}
+summarize_crc_table()
+```
+
+
+
+# Analysis
+
+
+
+```{r}
+# analysis(....)
+```
+
+# Interpretation and Conclusions
