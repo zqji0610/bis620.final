@@ -4,7 +4,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/Yukodeng/bis620.2023/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Yukodeng/bis620.2023/actions/workflows/R-CMD-check.yaml) [![test-coverage](https://github.com/Yukodeng/bis620.2023/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/Yukodeng/bis620.2023/actions/workflows/test-coverage.yaml)
+[![R-CMD-check](https://github.com/Yukodeng/bis620.final/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Yukodeng/bis620.final/actions/workflows/R-CMD-check.yaml) [![test-coverage](https://github.com/Yukodeng/bis620.final/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/Yukodeng/bis620.final/actions/workflows/test-coverage.yaml)
 
 <!-- badges: end -->
 
@@ -62,3 +62,55 @@ plot_intervention_count_time()
 ```
 
 <img src="man/figures/intervention_count_over_time.png" width="100%"/>
+
+### Statistical Analyses
+
+``` r
+enrollment_source_analysis()
+```
+
+<img src="man/figures/enrollment_source1.png" width="100%"/>
+
+<img src="man/figures/enrollment_source2.png" width="100%"/>
+
+<img src="man/figures/enrollment_source3.png" width="100%"/>
+
+``` r
+enrollment_phase_analysis()
+```
+
+<img src="man/figures/enrollment_phase1.png" width="100%"/>
+
+<img src="man/figures/enrollment_phase2.png" width="100%"/>
+
+<img src="man/figures/enrollment_phase3.png" width="100%"/>
+
+``` r
+enrollment_duration_analysis()
+```
+
+<img src="man/figures/enrollment_duration1.png" width="100%"/>
+
+<img src="man/figures/enrollment_duration2.png" width="100%"/>
+
+### Regression of Duration
+
+``` r
+duration_regression_analysis()
+```
+
+<img src="man/figures/regression1.png" width="100%"/>
+
+<img src="man/figures/regression2.png" width="100%"/>
+
+<img src="man/figures/regression3.png" width="100%"/>
+
+### Classification of Overall Status
+
+``` r
+status_classification()
+```
+
+<img src="man/figures/classification1.png" width="100%"/>
+
+<img src="man/figures/classification2.png" width="100%"/>

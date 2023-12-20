@@ -16,48 +16,129 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>"
 
 # Background and Motivation
 
-Colorectal cancer (CRC) is the fourth common malignancy, representing 8.3% of all cancer diagnoses and 8.4% of all cancer deaths in the US. There are more than one million people living with CRC in the United States and 4.2% percent of all adults are expected to be diagnosed with CRC at some point during their lifetime
+Colorectal cancer (CRC) is the third most common cancer type and the second leading cause of all cancer deaths, representing about 10% of all cancer diagnoses worldwide. In the United States, there are more than one million people living with CRC, and 4.2% percent of all adults are expected to be diagnosed with CRC at some point in their lives. CRC is also highly metastatic--more than 50% of the patients with CRC are expected to experience metastases during the course of their disease. 
+
+In recent decades, we have seen many advancements in the treatment of metastatic CRC (mCRC), including developments of traditional surgical and/or chemotherapy procedures (e.g. FOLFOX), new targeted therapies tailored for individual genetic and molecular profiles (e.g., Panitumumab, Aflibercept, etc.), as well as the emergence of new immunotherapeutic drugs (e.g., Pembrolizumab, Nivolumab, and Ipilimumab). Knowing the past trends in these clinical developments can provide valuable insights into the future directions of mCRC treatment.
+
+Therefore, utilizing the openly accessible database from [ClinicalTrials.gov](https://clinicaltrials.gov/), our project aims to explore and summarize some of the key underlying trends and characteristics in recent clinical trials on mCRC, including 1) the evolution of the distribution of intervention categories (e.g., drug, device, behavioral, etc.) over time, 2) the number of different therapeutic approaches being investigated over time, and 3) factors impacting trial completion and success (e.g., study type, phase, sponsorship, etc.). Addressing these questions will help obtain a clearer picture of the current landscape of clinical research on the condition of mCRC, potentially showing us future prospects toward expanded treatment options and enhanced precision medicines for mCRC.
 
 # Research Question
 
+-   Which factor(s) shows a significant influence on enrollment numbers in mCRC clinical trials?
+-   Prediction: How do the phase of the trial, enrollment numbers, and source class collectively influence the study duration of mCRC clinical trials?
+-   Classification: How can we predict the overall completion status using a set of factors, including enrollment, study duration, phase, intervention type, and source class?
+
 # Data Cleaning and Exploration
 
-## Datasets used in our analysis
+## Datasets Used in Analysis
 
-```{r}
-library(bis620.final)
-crc_sub |> head(5)
-```
+We first extract the `nct_ids` of clinical trials for metastatic colorectal cancer from the clinicaltrials.gov database using the dplyr `filter` query. Then, the nct_ids are used to join datasets with study information and intervention types and descriptions. This allows us to derive the two datasets that we will use for the analyses:
+
+-   The `crc` data table contains information about individual mCRC clinical trials, with each entry representing one trial. There are 717 entries and 12 variables. Variables include study id, title, start date, completion date, phase, etc.
+
+    ```{r}
+    library(bis620.final)
+    crc |> head(5)
+    ```
+
+-   The `crc_sub` data table merged additional information about intervention groups (arms) to the `crc` data table, with one clinical trial potentially having multiple groups. There are 1,697 entries and 16 variables.
+
+    ```{r}
+    crc_sub |> head(5)
+    ```
 
 ## Data Visualization
 
+### Eplorative Data Analysis
 
-### Time Trend
+To understand the underlying characteristics of mCRC clinical trials, we drew attention to the distribution of interventional and observational study designs, specifically stratified by the types of intervention and study phases. The table below shows that there is a clear dominance of interventional (or experimental) over observational studies, as well as a prominence of interventions involving drugs over any other forms. This is not surprising as drugs encompass a wide range of therapeutic approaches such as protein binding pathway-targeted drugs, immune checkpoint targeted drugs, and chemotherapy drugs, which are all prodominant treatment options. Finally, we see that most clinical trials (interventional studies) are phase 2 studies, which is defined as "conducted to evaluate the effectiveness of the drug for a particular indication or indications ... and to determine the common short-term side effects and risks".
 
-Proportion of Intervention Types over Time
+```{r}
+summarize_crc_table()
+```
+
+Showing below is the Sankey diagram demonstrating the same information as in the above table. Yet we included the graph to show more straightforwardly the proportionality of the distributions.
+
+```{r}
+plot_crc_sankey(c('2000-01-01','2024-12-31'))
+```
+
+### Visualization: Evolution Over Time
+
+A key question to the data is the evolving trend of clinical trials over time. We therefore wanted to visualize the changes of total number of mCRC clinical trials from the 2000s to the 2020s. Below shows the total number of each type of the interventions across time, from which we can see that 1) there is a clear increase in the overall total number of trials and 2) the proportions of other types of interventions than drugs seem to also increase over time.
+
+```{r}
+plot_intervention_count_time()
+```
+
+To investigate whether the second observation is actually true, we generate another plot showing the proportions of different intervention types (as shown below). We may see that there is a slight increase in the proportion of biological interventions over time, while the other types (procedure, radiation, etc.) remain generally unchanged. This might suggest that, being the traditional, gold-standard treatment, radiological and surgical procedures are not actively research in clinical trials; In contrast, new drugs representing various therapeutic approaches are constantly being investigated in clinical studies.
 
 ```{r}
 plot_intervention_proportion_time()
 ```
 
-### Number of Intervention Types over Time
+Lastly, to make specific inquiries into the temporal trends of the clinical trials, we wrote a function that allows querying the data in respect to specific therapies, intervention types, or any given keywords and plotting the time trend accordingly. Bellow is an example of one of the graphs showing the number of clinical trials with intervention type "drug" over time.
+
 ```{r}
-plot_intervention_count_time()
+plot_query_time_trend("drug", quo(intervention_type))
 ```
-
-## Summary table & Sankey Diagram
-```{r}
-summarize_crc_table()
-```
-
-
 
 # Analysis
 
+## Anova
 
+We conducted statistical examinations to assess the variation in enrollment numbers across 3 different factors: phase of the trial, the duration of the study, and the source class.
+
+### 1. Enrollment \~ Phase
+
+ANOVA to identify significant differences in enrollment among trial phases, followed by Tukey's Honest Significant Difference (HSD) test to conduct pairwise comparisons between trial phases to identify where the differences lay. Data is visualized using box plots, highlighting enrollment distribution across phases. Outliers are indicated by red asterisks, representing enrollments that are notably higher or lower than the typical range for their respective phases.
 
 ```{r}
-# analysis(....)
+enrollment_source_analysis()
+```
+
+### 2. Enrollment \~ Source Class
+
+We performed the ANOVA and the Kruskal-Wallis test to determine if there were significant differences in enrollment among various source classes. To visualize enrollment distributions, we created a histogram which provided an overview of enrollment frequencies, and a bar plot that depicted mean enrollment counts by source class.
+
+```{r}
+enrollment_phase_analysis()
+```
+
+### 3. Enrollment \~ Study Duration
+
+Using ANOVA, we assessed the impact of study duration on enrollment numbers. Additionally, we visualized this relationship through a scatter plot created with ggplot2, which highlighted enrollment trends over the duration of the studies. The data were filtered to include only trials with complete enrollment and duration information, ensuring accuracy and relevance in our analysis.
+
+```{r}
+enrollment_duration_analysis()
+```
+
+### Regression Analysis:
+
+A regression analysis was performed to fit and predict study duration using several factors including enrollment, source class, and phase.Key steps included filtering data for completeness, transforming dates, and calculating study duration. A linear regression model was fitted, with outlier removal guided by Cook's distance with a threshold of 4/n. The refined model's results were evaluated through diagnostic plots and a comparison of Actual vs. Predicted study durations plot.
+
+```{r}
+duration_regression_analysis()
+```
+
+### Overall Status Classification
+
+In the classification task, we used a set of variables, including duration, enrollment, intervention_type, source_class, and phase to predict the overall status of a clinical trial through a logistic regression model. Multiple combinations of variables were experimented to optimize model performance. The target variable overall_status was converted into a binary variable for this classification task. Specifically, values of "Recruiting", "Completed", "Active, not recruiting", and "Not yet recruiting" are defined as class 1, and values of "Terminated", "Withdrawn", and "Suspended" are defined as class 0. Those with values "Unknown status" are deleted and not included in the classification task. In terms of determining the optimal probability threshold for converting probabilities to classes in prediction, we used the pROC package that helps determine the optimal threshold.
+
+```{r}
+status_classification()
 ```
 
 # Interpretation and Conclusions
+
+To determine the significant factors influencing enrollment numbers in mCRC clinical trials, ANOVA tests were conducted. All three ANOVA summary tables indicate highly significant differences in enrollment numbers across the different phases of clinical trials, source classes, and study duration, as evidenced by a very low p-value (\<0.05). The Tukey's HSD plot presents confidence intervals for pairwise differences between phases. The plot shows several intervals (phase 3, phase 4, etc.) that do not include zero, indicating significant differences in mean enrollment between certain phases. The Kruskal-Wallis rank sum test result indicates a highly significant difference in enrollment numbers across various source classes of clinical trials (with chi-squared = 103.3). This suggests that the source class is likely an influential factor affecting enrollment in these trials.
+
+To predict the collective influence of different factors on the study duration of mCRC clinical trials, a multivariate linear regression model was developed. The regression output and diagnostic plots provide insight into the relationship between study duration and the predictors. The output shows that enrollment, NIH (as a source class), and the trial phase have significant effects on study duration. For instance, being funded by the NIH is associated with an increase in study duration, as indicated by a large positive coefficient that is statistically significant. The diagnostic plots suggest that the residuals are reasonably well-behaved, with no obvious patterns in the Residuals vs Fitted plot. The Scale-Location plot indicates that the variance of residuals is relatively constant across the range of fitted values. Though the Residuals vs Leverage plot identifies a few potential outliers, they are acceptable as the Cook's distance for all points is below the common threshold. The scatter plot of Predicted vs Actual values shows how well the model's predictions match the actual data, with points color-coded by source class. Points falling along the dashed line represent accurate predictions. The dispersion of points around this line reflects the variability in prediction accuracy, potentially due to unaccounted factors affecting study duration. We observed that the points cluster (or stratified) by source class, revealing that NIH-sourced trials generally exhibit shorter study durations, suggesting source-specific influences on trial length.
+
+In order to classify the overall completion status using different factors, we built a binary logistic regression model with 81.0% accuracy. This high level of accuracy is evidenced by the confusion matrix. The model correctly predicted 63 trials as not meeting the success criteria (true negatives) and 287 as meeting them (true positives), while misclassifying only 16 as false negatives and 66 as false positives. The confusion matrix plot visually confirms the model's effectiveness, with a clear distinction between successful and unsuccessful trial classifications.
+
+# Discussion
+
+Potential future directions of the study include carrying out time series analyses on how the distribution of study phases change over time, and how other factors such as enrollment number, treatment approach, and sponsorship come into play. Moreover, to take a step further, we may conduct meta-analyses on treatment efficacies if outcome data are available. For example, we can perform survival analyses (e.g., Kaplan-Meier curves, log-rank tests) to compare the effectiveness of different therapeutic drugs.
+
+We also noticed that a large proportion of the studies were terminated or suspended. While information availabe in the database could not tell us the exact reasons for termination, it might be important to investigate factors correlated with trial success such as trial phase, targeted therapy types, etc.

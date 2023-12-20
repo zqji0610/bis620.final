@@ -29,7 +29,7 @@
 # sponsors <- rename_columns(sponsors, "sponsor")
 # conditions <- rename_columns(conditions, "condition")
 # interventions <- rename_columns(interventions, "intervention")
-#
+# View(crc |> head(10))
 # # View(sponsors |> collect() |> head(10))
 # # View(studies |> collect() |> head(10))
 # # View(conditions |> collect() |> head(10))
@@ -85,13 +85,62 @@
 #        count(intervention_type))
 #
 # library(lubridate)
-# crc_drug <- crc_sub |>
-#   mutate(start_date_mo = floor_date(start_date, "month")) |>
-#   group_by(start_date_mo, intervention_type) |>
-#   summarize(count = n()) |>
-#   filter(intervention_type=='Drug')
-# crc_drug |>
-#   ggplot(aes(x=start_date_mo, y=count)) +
-#   geom_point() + geom_line()
 #
+# ## Drug
+#
+# intervention_kwds_time_trend <- function(kwds, )
+# crc_sub |>
+#   mutate(start_date_mo = floor_date(start_date, "month")) |>
+#   filter(
+#     # intervention_type=='Drug' &
+#     grepl('bev', description, ignore.case=T)   &
+#     (!is.na(start_date_mo))) |>
+#   group_by(start_date_mo) |>
+#   mutate(count = n()) |>
+#   ggplot(aes(x=start_date_mo, y=count)) +
+#   geom_line() +
+#   scale_x_date(breaks = "2 year", date_labels = '%Y')
+#
+# crc_sub |>
+#   filter(grepl("FOLFOX.*pani|pani.*FOLFOX", description, ignore.case=T))
+#
+#
+# crc |>
+#   filter(grepl("radio", brief_title, ignore.case = T)) |>
+#   mutate(start_date_mo = floor_date(start_date, "month")) |>
+#   # filter(intervention_type=='Drug' & (!is.na(start_date_mo))) |>
+#   group_by(start_date_mo) |>
+#   summarize(count = n()) |>
+#   # right_join(
+#   #   data.frame(
+#   #     start_date_mo = seq(
+#   #       min(crc_drug$start_date_mo),
+#   #       max(crc_drug$start_date_mo),
+#   #       by = "month")
+#   #   ), by = "start_date_mo") |>
+#   # mutate(count = runner::fill_run(count, run_for_first = T))
+#   ggplot(aes(x=start_date_mo, y=count)) +
+#   geom_line() +
+#   scale_x_date(breaks = "5 year", date_labels = '%Y')
+#
+#
+# par(mfrow=c(1,2))
 # acf(crc_drug$count)
+# pacf(crc_drug$count)
+#
+# library(tseries)
+# kpss.test(crc_drug$count, null = "Trend")
+#
+#
+# # install.packages("forecast")
+# library("forecast")
+# drug.m <- auto.arima(crc_drug$count)
+# bio.m <- auto.arima(crc_bio$count)
+# checkresiduals(drug.m)
+# checkresiduals(bio.m)
+# plot(crc_drug$count, drug.m$fitted, main = "ARIMA regression model", xlab="Original", ylab="Fitted")
+#
+# autoplot(crc_drug$count)
+# ts(1:10, frequency = 4, start = 1959) # 2nd Quarter of 1959
+# dates <- ts(start = c(2000, 1), end =c(2024,1), frequency = 12)
+#
