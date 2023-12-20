@@ -16,16 +16,16 @@ duration_regression_analysis <- function(dates=c('2000-01-01','2100-01-01')) {
   crc_sub |> filter(start_date >= start & start_date <= end)
 
   # Filter out rows with missing phase or enrollment information
-  filtered_data <- crc_sub %>%
+  filtered_data <- crc_sub |>
     filter(!is.na(phase)  & !is.na(source_class) & !is.na(enrollment))
 
 
-  data <- filtered_data %>%
+  data <- filtered_data |>
     dplyr::mutate(start_date = lubridate::ymd(start_date),
            completion_date = lubridate::ymd(completion_date),
            study_time = as.numeric(difftime(completion_date, start_date, units = "days")),
            phase = as.factor(phase),
-           source_class = as.factor(source_class)) %>%
+           source_class = as.factor(source_class)) |>
     filter(!is.na(study_time))
 
 

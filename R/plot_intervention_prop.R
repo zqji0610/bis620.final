@@ -3,8 +3,9 @@
 #' and plots a density plot showing the proportion of each intervention type over time
 #' @param dates A list of two date values (lower and upper, respectively)
 #' @return A density plot showing the proportion of intervention types vs. time
-#' @importFrom ggplot2 aes geom_density scale_x_date labs theme_minimal
+#' @importFrom ggplot2 aes geom_density scale_x_date labs theme_minimal after_stat
 #' @importFrom dplyr filter
+#' @export
 plot_intervention_proportion_time <- function(dates=c('2000-01-01','2100-01-01')) {
   start <- as.Date(dates[1])
   end <- as.Date(dates[2])

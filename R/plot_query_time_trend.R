@@ -28,8 +28,9 @@ query_kwds <- function(kwds, column, ignore.case = TRUE, match_all = FALSE) {
 #' @param match_all A Boolean, default FALSE. Specify whether the query
 #' requires the column value to match all the kwds or just one of them
 #' @return a line plot showing the count of queried clinical trials over time
-#' @importFrom dplyr filter mutate group_by
+#' @importFrom dplyr filter mutate group_by n
 #' @importFrom ggplot2 geom_line scale_x_date labs
+#' @export
 plot_query_time_trend <- function(kwds, column, ignore.case = TRUE, match_all = FALSE) {
    query_kwds(kwds, column, ignore.case, match_all) |>
     mutate(start_date_mo = lubridate::floor_date(start_date, "month")) |>

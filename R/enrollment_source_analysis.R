@@ -37,9 +37,9 @@ enrollment_source_analysis <- function(dates=c('2000-01-01','2100-01-01')) {
   print(kruskal_result)
 
   #mean enrollment counts by different source classes
-  crc_temp %>%
-    group_by(source_class) %>%
-    summarize(mean_enrollment = mean(enrollment, na.rm = TRUE)) %>%
+  crc_temp |>
+    group_by(source_class) |>
+    summarize(mean_enrollment = mean(enrollment, na.rm = TRUE)) |>
     ggplot2::ggplot(aes(x = source_class, y = mean_enrollment)) +
     ggplot2::geom_bar(stat = "identity", fill = "coral") +
     labs(title = "Mean Enrollment by Source Class",

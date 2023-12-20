@@ -60,6 +60,8 @@ summarize_crc_table()
 Showing below is the Sankey diagram demonstrating the same information as in the above table. Yet we included the graph to show more straightforwardly the proportionality of the distributions.
 
 ```{r}
+library(dplyr)
+library(ggalluvial)
 plot_crc_sankey(c('2000-01-01','2024-12-31'))
 ```
 
@@ -67,7 +69,7 @@ plot_crc_sankey(c('2000-01-01','2024-12-31'))
 
 A key question to the data is the evolving trend of clinical trials over time. We therefore wanted to visualize the changes of total number of mCRC clinical trials from the 2000s to the 2020s. Below shows the total number of each type of the interventions across time, from which we can see that 1) there is a clear increase in the overall total number of trials and 2) the proportions of other types of interventions than drugs seem to also increase over time.
 
-```{r}
+```{r interv count}
 plot_intervention_count_time()
 ```
 

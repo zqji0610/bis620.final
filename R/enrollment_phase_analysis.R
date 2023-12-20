@@ -19,7 +19,7 @@ enrollment_phase_analysis <- function(dates=c('2000-01-01','2100-01-01')) {
   crc_sub |> filter(start_date >= start & start_date <= end)
 
   # Filter out rows with missing phase or enrollment information
-  filtered_data <- crc_sub %>%
+  filtered_data <- crc_sub |>
     filter(!is.na(phase) & !is.na(enrollment))
 
   filtered_data$enrollment <- as.numeric(filtered_data$enrollment)

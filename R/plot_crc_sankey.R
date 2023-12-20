@@ -6,9 +6,9 @@
 #' by intervention types and phases
 #' @param dates A list of two date values (lower and upper, respectively)
 #' @return A Sankey (or Alluvial) plot showing the clinical trials distribution
-#' @importFrom ggplot2 aes geom_text labs theme_void
-#' @importFrom ggalluvial geom_alluvium geom_stratum
-#' @importFrom dplyr filter group_by summarize
+#' @importFrom ggplot2 aes geom_text labs theme_void after_stat
+#' @importFrom ggalluvial geom_alluvium geom_stratum stat_stratum
+#' @importFrom dplyr filter group_by summarize n
 #' @export
 plot_crc_sankey <- function(dates=c('2000-01-01','2100-01-01')) {
   start <- as.Date(dates[1])
