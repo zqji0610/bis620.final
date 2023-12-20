@@ -4,7 +4,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/Yukodeng/bis620.final/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Yukodeng/bis620.final/actions/workflows/R-CMD-check.yaml) [![test-coverage](https://github.com/Yukodeng/bis620.final/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/Yukodeng/bis620.final/actions/workflows/test-coverage.yaml)
+[![R-CMD-check](https://github.com/NickyYiningChen/bis620.final/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/NickyYiningChen/bis620.final/actions/workflows/R-CMD-check.yaml) [![test-coverage](https://github.com/NickyYiningChen/bis620.final/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/NickyYiningChen/bis620.final/actions/workflows/test-coverage.yaml)
 
 <!-- badges: end -->
 
@@ -16,10 +16,10 @@ You can install the development version of bis620.final from [GitHub](https://gi
 
 ``` r
 install.packages("devtools")
-install_github("Yukodeng/bis620.final")
+install_github("NickyYiningChen/bis620.final")
 
 # Or alternatively:
-devtools::install_github("Yukodeng/bis620.final")
+devtools::install_github("NickyYiningChen/bis620.final")
 ```
 
 ## Example
