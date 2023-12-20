@@ -17,8 +17,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/Yukodeng/bis620.final/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Yukodeng/bis620.final/actions/workflows/R-CMD-check.yaml) [![test-coverage](https://github.com/Yukodeng/bis620.final/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/Yukodeng/bis620.final/actions/workflows/test-coverage.yaml)
-[![R-CMD-check](https://github.com/Yukodeng/bis620.final/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Yukodeng/bis620.final/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/Yukodeng/bis620.final/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Yukodeng/bis620.final/actions/workflows/R-CMD-check.yaml) [![test-coverage](https://github.com/Yukodeng/bis620.final/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/Yukodeng/bis620.final/actions/workflows/test-coverage.yaml) [![R-CMD-check](https://github.com/Yukodeng/bis620.final/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Yukodeng/bis620.final/actions/workflows/R-CMD-check.yaml)
+
 <!-- badges: end -->
 
 The bis620.final project aims to explore the current landscape of clinical studies on metastatic colorectal cancer (mCRC) using clinical trials metadata on clinicaltrials.gov. The package offers off-the-shelf data visualization and statistical analyses tools that allows users to understand characteristics of recent mCRC clinical trials.
@@ -41,7 +41,7 @@ devtools::install_github("Yukodeng/bis620.final")
 
 The below code block shows you the one of the datasets we are using which consists of information about 717 clinical trials that are related to mCRC:
 
-``` {r example1}
+```{r example1}
 library(bis620.final)
 crc |> head(5) 
 ```
@@ -56,24 +56,27 @@ crc_sub |> head(5)
 
 Here are a few snapshots of implementing the functions of this package:
 
-```r
+``` r
 summarize_crc_table()
 ```
+
 <img src="man/figures/summary_table.png" width="80%"/>
 
-```r
+``` r
 plot_crc_sankey()
 ```
+
 <img src="man/figures/sankey_plot.png" width="80%"/>
 
-```r
+``` r
 plot_intervention_count_time()
 ```
+
 <img src="man/figures/intervention_count_over_time.png" width="80%"/>
 
 ### Statistical Analyses
 
-```r
+``` r
 enrollment_source_analysis()
 ```
 
@@ -83,7 +86,7 @@ enrollment_source_analysis()
 
 <img src="man/figures/enrollment_source3.png" width="70%"/>
 
-```r
+``` r
 enrollment_phase_analysis()
 ```
 
@@ -93,17 +96,17 @@ enrollment_phase_analysis()
 
 <img src="man/figures/enrollment_phase3.png" width="70%"/>
 
-```r
+``` r
 enrollment_duration_analysis()
 ```
 
-<img src="man/figures/enrollment_duration1.png" width="70%"/>
+![](man/figures/enrollment_duration1.png){width="70%"}
 
 <img src="man/figures/enrollment_duration2.png" width="70%"/>
 
 ### Regression of Duration
 
-```r
+``` r
 duration_regression_analysis()
 ```
 
@@ -115,7 +118,7 @@ duration_regression_analysis()
 
 ### Classification of Overall Status
 
-```r
+``` r
 status_classification()
 ```
 
