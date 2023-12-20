@@ -2,7 +2,7 @@
 #'
 #' @param kwds A string / list of strings. The query keyword(s)
 #' @param column A quosure (a string enclosed in `quo()`). The column to be filtered upon.
-#' @param ignore_case A Boolean, default TRUE. Specify whether the query is case-insensitive
+#' @param ignore.case A Boolean, default TRUE. Specify whether the query is case-insensitive
 #' @param match_all A Boolean, default FALSE. Specify whether the query
 #' requires the column value to match all the kwds or just one of them
 #' @return A table with filtered entries
@@ -24,7 +24,7 @@ query_kwds <- function(kwds, column, ignore.case = TRUE, match_all = FALSE) {
 #'
 #' @param kwds A string / list of strings. The query keyword(s)
 #' @param column A quosure (a string enclosed in `quo()`). The column to be filtered upon.
-#' @param ignore_case A Boolean, default TRUE. Specify whether the query is case-insensitive
+#' @param ignore.case A Boolean, default TRUE. Specify whether the query is case-insensitive
 #' @param match_all A Boolean, default FALSE. Specify whether the query
 #' requires the column value to match all the kwds or just one of them
 #' @return a line plot showing the count of queried clinical trials over time

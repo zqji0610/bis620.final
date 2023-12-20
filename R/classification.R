@@ -8,7 +8,7 @@
 #' accuracy levels, and a graph visualizing the confusion matrix values.
 #' @importFrom ggplot2 aes geom_tile geom_text scale_fill_gradient labs theme_minimal
 #' @importFrom dplyr filter mutate summarise case_when
-#' @importFrom stats glm predict
+#' @importFrom stats glm predict binomial kruskal.test
 #' @importFrom reshape2 melt
 #' @importFrom pROC roc coords
 #' @export

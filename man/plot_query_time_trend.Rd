@@ -12,10 +12,10 @@ plot_query_time_trend(kwds, column, ignore.case = TRUE, match_all = FALSE)
 
 \item{column}{A quosure (a string enclosed in \code{quo()}). The column to be filtered upon.}
 
+\item{ignore.case}{A Boolean, default TRUE. Specify whether the query is case-insensitive}
+
 \item{match_all}{A Boolean, default FALSE. Specify whether the query
 requires the column value to match all the kwds or just one of them}
-
-\item{ignore_case}{A Boolean, default TRUE. Specify whether the query is case-insensitive}
 }
 \value{
 a line plot showing the count of queried clinical trials over time

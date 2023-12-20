@@ -3,6 +3,7 @@
 #' @param dates A list of two date values (start and end date, respectively) to define the period for analysis.
 #' @return The function returns the results from the regression analysis, diagnostic plots to assess the model, and a plot comparing
 #' actual vs predicted values of study duration.
+#' @importFrom graphics par
 #' @importFrom dplyr filter mutate
 #' @importFrom lubridate ymd
 #' @importFrom stats lm cooks.distance
@@ -44,7 +45,6 @@ duration_regression_analysis <- function(dates=c('2000-01-01','2100-01-01')) {
 
   par(mfrow = c(2, 2))
   plot(lm_model_no_outliers)
-
 
   data_no_outliers$predicted <- predict(lm_model_no_outliers, data_no_outliers)
   ggplot2::ggplot(data_no_outliers, aes(x = study_time, y = predicted)) +
