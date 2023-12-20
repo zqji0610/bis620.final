@@ -3,7 +3,7 @@ Type: Package
 Title: bis620.final
 Version: 0.1.0
 Author: Yining Chen, Yufei Deng, Ziqing Ji
-Maintainer: The package maintainer <yining.chen@yale.edu>
+Maintainer: The package maintainer <ziqing.ji@yale.edu>
 Description: This package allows users to explore clinical trial studies on metastatic colorectal cancer, visualize trends of over time, and carry out statistical analyses on the data.
 License: GPL (>= 2)
 Encoding: UTF-8
@@ -32,4 +32,4 @@ Config/testthat/edition: 3
 Depends: 
     R (>= 2.10)
 VignetteBuilder: knitr
-URL: https://NickyYiningChen.github.io/bis620.final/
+URL: https://zqji0610.github.io/bis620.final/
