@@ -119,9 +119,17 @@ enrollment_duration_analysis()
 
 A regression analysis was performed to fit and predict study duration using several factors including enrollment, source class, and phase.Key steps included filtering data for completeness, transforming dates, and calculating study duration. A linear regression model was fitted, with outlier removal guided by Cook's distance with a threshold of 4/n. The refined model's results were evaluated through diagnostic plots and a comparison of Actual vs. Predicted study durations plot.
 
-```{r}
+``` r
 duration_regression_analysis()
 ```
+
+\<img src="man/figures/regression1.png" width="70%"/\>
+
+
+\<img src="man/figures/regression2.png" width="70%"/\>
+
+
+\<img src="man/figures/regression3.png" width="70%"/\>
 
 ### Overall Status Classification
 
@@ -144,3 +152,4 @@ In order to classify the overall completion status using different factors, we b
 Potential future directions of the study include carrying out time series analyses on how the distribution of study phases change over time, and how other factors such as enrollment number, treatment approach, and sponsorship come into play. Moreover, to take a step further, we may conduct meta-analyses on treatment efficacies if outcome data are available. For example, we can perform survival analyses (e.g., Kaplan-Meier curves, log-rank tests) to compare the effectiveness of different therapeutic drugs.
 
 We also noticed that a large proportion of the studies were terminated or suspended. While information availabe in the database could not tell us the exact reasons for termination, it might be important to investigate factors correlated with trial success such as trial phase, targeted therapy types, etc.
+
