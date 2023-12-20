@@ -12,7 +12,6 @@
 #' @export
 enrollment_source_analysis <- function(dates=c('2000-01-01','2100-01-01')) {
 
-  dates=c('2000-01-01','2100-01-01')
   start <- as.Date(dates[1])
   end <- as.Date(dates[2])
   crc_sub |> filter(start_date >= start & start_date <= end)
